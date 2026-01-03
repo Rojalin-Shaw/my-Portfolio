@@ -44,7 +44,7 @@ export function ResumeSection() {
 
             <h3 className="text-2xl font-bold mb-4">Rojalin Shaw - Resume</h3>
             <p className="text-muted-foreground mb-8">
-              Full Stack Developer specializing in Java, Spring Boot, Angular, and Node.js.
+              Full Stack Developer specializing in Java, Spring Boot, and Node.js.
               View my complete professional background, education, skills, and project experience.
             </p>
 
@@ -101,7 +101,7 @@ export function ResumeSection() {
               <div>
                 <h5 className="font-semibold text-primary mb-2">Skills</h5>
                 <p className="text-sm text-muted-foreground">
-                  Java, Spring Boot, Angular, Node.js,<br />
+                  Java, Basics of React Node.js,<br />
                   MySQL, REST API, Git
                 </p>
               </div>
@@ -110,14 +110,18 @@ export function ResumeSection() {
                 <p className="text-sm text-muted-foreground">
                   E-Commerce Website<br />
                   Hotel Management System<br />
-                  Healthcare App
+                  Healthcare App<br />
+                  Chat-Application<br />
+                  Weather-App<br />
                 </p>
               </div>
               <div>
                 <h5 className="font-semibold text-primary mb-2">Certifications</h5>
                 <p className="text-sm text-muted-foreground">
                   Data Structures & Algorithms<br />
-                  Database Management Systems
+                  Database Management Systems<br />
+                  ABAP RESTful Application<br />
+                  Back-End Developer - ABAP Cloud
                 </p>
               </div>
             </div>

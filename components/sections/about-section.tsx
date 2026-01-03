@@ -78,8 +78,8 @@ export function AboutSection() {
               onClick={() => {
                 // Create a temporary link to download resume
                 const link = document.createElement('a');
-                link.href = '/docs/Rojalinresume.pdf'; // You'll need to add your actual resume file
-                link.download = '/docs/Rojalinresume.pdf';
+                link.href = '/docs/Rojalinresume.pdf';
+                link.download = 'Rojalinresume.pdf';
                 link.click();
               }}
             >
