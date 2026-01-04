@@ -21,23 +21,28 @@ export function Navbar() {
   const [activeSection, setActiveSection] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
   const { theme, setTheme } = useTheme();
+
+  // Ensure client-only rendering for theme-dependent UI
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-      
-      // Update active section based on scroll position
+
       const sections = navItems.map(item => item.href.substring(1));
       const currentSection = sections.find(section => {
         const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 150 && rect.bottom >= 150;
-        }
-        return false;
+        if (!element) return false;
+
+        const rect = element.getBoundingClientRect();
+        return rect.top <= 150 && rect.bottom >= 150;
       });
-      
+
       if (currentSection) {
         setActiveSection(currentSection);
       }
@@ -59,16 +64,16 @@ export function Navbar() {
     <motion.nav
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled 
-          ? "glass-dark border-b border-white/10 py-2" 
+        isScrolled
+          ? "glass-dark border-b border-white/10 py-2"
           : "bg-transparent py-4"
       )}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
-      suppressHydrationWarning
     >
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
+        {/* Logo */}
         <motion.div
           className="text-2xl font-bold text-gradient"
           whileHover={{ scale: 1.05 }}
@@ -91,14 +96,12 @@ export function Navbar() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
-              suppressHydrationWarning
             >
               {item.label}
               {activeSection === item.href.substring(1) && (
                 <motion.div
                   className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full"
                   layoutId="activeSection"
-                  transition={{ duration: 0.3 }}
                 />
               )}
             </motion.button>
@@ -107,24 +110,29 @@ export function Navbar() {
 
         {/* Theme Toggle & Mobile Menu */}
         <div className="flex items-center gap-4">
+          {/* Theme Toggle (Hydration Safe) */}
           <AnimatedButton
             variant="ghost"
             size="icon"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            onClick={() =>
+              setTheme(theme === "dark" ? "light" : "dark")
+            }
             className="glass border-white/10"
           >
-            {theme === "dark" ? (
-              <FiSun className="w-4 h-4" />
-            ) : (
-              <FiMoon className="w-4 h-4" />
-            )}
+            {mounted ? (
+              theme === "dark" ? (
+                <FiSun className="w-4 h-4" />
+              ) : (
+                <FiMoon className="w-4 h-4" />
+              )
+            ) : null}
           </AnimatedButton>
 
           {/* Mobile Menu Toggle */}
           <AnimatedButton
             variant="ghost"
             size="icon"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={() => setIsMobileMenuOpen(prev => !prev)}
             className="lg:hidden glass border-white/10"
           >
             {isMobileMenuOpen ? (
@@ -152,7 +160,7 @@ export function Navbar() {
                   key={item.href}
                   onClick={() => scrollToSection(item.href)}
                   className={cn(
-                    "block text-left w-full py-2 text-sm font-medium transition-colors hover:text-primary",
+                    "block w-full text-left py-2 text-sm font-medium transition-colors hover:text-primary",
                     activeSection === item.href.substring(1)
                       ? "text-primary"
                       : "text-muted-foreground"
@@ -160,7 +168,6 @@ export function Navbar() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
-                  suppressHydrationWarning
                 >
                   {item.label}
                 </motion.button>

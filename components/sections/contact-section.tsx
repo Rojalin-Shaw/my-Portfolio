@@ -142,7 +142,7 @@ export function ContactSection() {
                       onChange={handleInputChange}
                       required
                       className="w-full px-4 py-3 bg-background/50 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
-                      placeholder="John Doe"
+                      placeholder="Rojalin shaw"
                     />
                   </div>
                   
@@ -158,7 +158,7 @@ export function ContactSection() {
                       onChange={handleInputChange}
                       required
                       className="w-full px-4 py-3 bg-background/50 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
-                      placeholder="john@example.com"
+                      placeholder="roja@example.com"
                     />
                   </div>
                 </div>
@@ -288,7 +288,7 @@ export function ContactSection() {
               <Card className="p-6 bg-gradient-to-br from-primary/10 to-purple-500/10 border-primary/20">
                 <h4 className="font-bold mb-2">Ready to work together?</h4>
                 <p className="text-muted-foreground text-sm mb-4">
-                  I'm currently available for freelance projects and full-time opportunities.
+                  I'm currently available full-time opportunities.
                 </p>
                 <div className="flex gap-3">
                   <AnimatedButton
